@@ -41,7 +41,7 @@ jobs:
 
       - name: Build the docs
         run: |
-          export BASE_URL=/${{ github.event.repository.name }}/
+          export BASE_URL=preview-${{ github.event.pull_request.number }}
           echo "Using baseUrl=$BASE_URL"
           yarn build
 
@@ -71,4 +71,4 @@ jobs:
           mode: recreate
           message: |
             ✅ Preview deployed for this PR!  
-            🌍 [View the documentation preview](${{ steps.deploy.outputs.page_url }})
+            🌍 [View the documentation preview](https://<user>.github.io/<repo>/preview-${{ github.event.pull_request.number }}/)
