@@ -43,7 +43,7 @@ jobs:
         run: |
           export BASE_URL=/preview-${{ github.event.pull_request.number }}/
           echo "Using baseUrl=$BASE_URL"
-          yarn build -- --baseUrl $BASE_URL
+          yarn build
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
