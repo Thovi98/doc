@@ -71,4 +71,4 @@ jobs:
           mode: recreate
           message: |
             ✅ Preview deployed for this PR!  
-            🌍 [View the documentation preview](https://<user>.github.io/<repo>/preview-${{ github.event.pull_request.number }}/)
+            🌍 [View the documentation preview](https://thovi98.github.io/doc/preview-${{ github.event.pull_request.number }}/)

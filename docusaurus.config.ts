@@ -18,7 +18,7 @@ const config: Config = {
   favicon: 'img/favicon.png',
 
   url: getUrl(),
-  baseUrl: `/${process.env.BASE_URL || ''}/`,
+  baseUrl: process.env.BASE_URL || '/',
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
