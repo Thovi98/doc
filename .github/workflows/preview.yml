@@ -40,7 +40,10 @@ jobs:
         run: python3 ./scripts/check_i18n_consistency.py
 
       - name: Build the docs
-        run: yarn build
+        run: |
+          export BASE_URL=/${{ github.event.repository.name }}/
+          echo "Using baseUrl=$BASE_URL"
+          yarn build
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
