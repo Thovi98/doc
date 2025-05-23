@@ -46,15 +46,15 @@ jobs:
           #test
           BASE_URL: /${{ github.event.repository.name }}/pr-${{ github.event.pull_request.number }}/
 
-        - name: Move built docs to PR-specific folder
-          run: |
+      - name: Move built docs to PR-specific folder
+        run: |
             mkdir -p pr-${{ github.event.pull_request.number }}
             mv build/* pr-${{ github.event.pull_request.number }}/
 
-        - name: Upload GitHub Pages artifact
-          uses: actions/upload-pages-artifact@v3
-          with:
-            path: pr-${{ github.event.pull_request.number }}/
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: pr-${{ github.event.pull_request.number }}/
 
   deploy:
     name: Deploy preview to GitHub Pages
