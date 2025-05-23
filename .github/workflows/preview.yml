@@ -40,7 +40,9 @@ jobs:
           echo "Using baseUrl=$BASE_URL"
           yarn build
         env:
-          BASE_URL: /pr-${{ github.event.pull_request.number }}/
+          #BASE_URL: /pr-${{ github.event.pull_request.number }}/
+          #test
+          BASE_URL: /
 
       - name: Archive the docs
         uses: actions/upload-artifact@v4
