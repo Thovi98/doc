@@ -42,7 +42,7 @@ jobs:
         env:
           #BASE_URL: /pr-${{ github.event.pull_request.number }}/
           #test
-          BASE_URL: /${{ github.event.repository.name }}/
+          BASE_URL: /${{ github.event.repository.name }}/pr-${{ github.event.pull_request.number }}/
 
       - name: Archive the docs
         uses: actions/upload-artifact@v4
