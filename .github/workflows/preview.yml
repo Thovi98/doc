@@ -20,13 +20,15 @@ jobs:
     timeout-minutes: 30
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout PR branche
         uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v5
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
           node-version: lts/*
           cache: yarn
       - name: Installation
@@ -76,4 +78,4 @@ jobs:
           mode: recreate
           message: |
             ✅ Preview deployed for this PR!  
-            🌍 [View the documentation preview](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+            🌍 [View the documentation preview](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/)
