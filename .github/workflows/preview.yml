@@ -48,7 +48,12 @@ jobs:
           echo "Using baseUrl=$BASE_URL"
           yarn build
         env:
-          BASE_URL: /${{ github.event.repository.name }}/
+          BASE_URL: /${{ github.event.repository.name }}/pr-${{ github.event.pull_request.number }}/
+
+      - name: Move built docs to PR-specific folder
+        run: |
+          mkdir -p pr-${{ github.event.pull_request.number }}
+          mv build/* pr-${{ github.event.pull_request.number }}/
 
       - name: Upload artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v3
@@ -75,4 +80,4 @@ jobs:
           mode: recreate
           message: |
             ✅ Preview deployed for this PR!  
-            🌍 [View the documentation preview](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/)
+            🌍 [View the documentation preview](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-${{ github.event.pull_request.number }}/)
