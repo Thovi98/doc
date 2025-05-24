@@ -79,5 +79,5 @@ jobs:
           comment-tag: gh-pages-preview
           mode: recreate
           message: |
-            🚀 Preview deployed for PR #${{ github.event.pull_request.number }}  
-            🔗 [View it here](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-${{ github.event.pull_request.number }}/)
+            ✅ Preview deployed for this PR!  
+            🌍 [View the documentation preview](https://${{ github.repository_owner }}.github.io/pr-${{ github.event.pull_request.number }}/)
