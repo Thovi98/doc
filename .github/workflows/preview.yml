@@ -48,7 +48,7 @@ jobs:
           echo "Using baseUrl=$BASE_URL"
           yarn build
         env:
-          BASE_URL: /${{ github.event.repository.name }}/pr-${{ github.event.pull_request.number }}/
+          BASE_URL: /pr-${{ github.event.pull_request.number }}/
 
       - name: Move built docs to PR-specific folder
         run: |
