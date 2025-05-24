@@ -19,8 +19,9 @@ jobs:
     name: Build Docs
     timeout-minutes: 30
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout PR branche
+      - name: Checkout PR branch
         uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -29,8 +30,13 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
           node-version: lts/*
           cache: yarn
+
       - name: Installation
         run: yarn
 
@@ -42,16 +48,14 @@ jobs:
           echo "Using baseUrl=$BASE_URL"
           yarn build
         env:
-          #BASE_URL: /pr-${{ github.event.pull_request.number }}/
-          #test
           BASE_URL: /${{ github.event.repository.name }}/pr-${{ github.event.pull_request.number }}/
 
       - name: Move built docs to PR-specific folder
         run: |
-            mkdir -p pr-${{ github.event.pull_request.number }}
-            mv build/* pr-${{ github.event.pull_request.number }}/
+          mkdir -p pr-${{ github.event.pull_request.number }}
+          mv build/* pr-${{ github.event.pull_request.number }}/
 
-      - name: Upload GitHub Pages artifact
+      - name: Upload artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
           path: pr-${{ github.event.pull_request.number }}/
@@ -65,10 +69,9 @@ jobs:
       
     steps:
       - name: Deploy to GitHub Pages
-        id: deploy
         uses: actions/deploy-pages@v4
 
-      - name: Comment PR with preview link
+      - name: Comment on PR with preview link
         uses: thollander/actions-comment-pull-request@v3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -76,5 +79,5 @@ jobs:
           comment-tag: gh-pages-preview
           mode: recreate
           message: |
-            ✅ Preview deployed for this PR!  
-            🌍 [View the documentation preview](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-${{ github.event.pull_request.number }}/)
+            🚀 Preview deployed for PR #${{ github.event.pull_request.number }}  
+            🔗 [View it here](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-${{ github.event.pull_request.number }}/)
