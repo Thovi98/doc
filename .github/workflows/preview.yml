@@ -50,8 +50,15 @@ jobs:
         env:
           BASE_URL: /${{ github.event.repository.name }}/
 
+      - name: Move built docs to PR-specific folder
+        run: |
+          mkdir -p pr-${{ github.event.pull_request.number }}
+          mv build/* pr-${{ github.event.pull_request.number }}/
+
       - name: Upload artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v3
+        with:
+          path: pr-${{ github.event.pull_request.number }}/
 
   deploy:
     name: Deploy preview to GitHub Pages
